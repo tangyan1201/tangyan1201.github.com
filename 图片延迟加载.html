@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			*{padding: 0;margin: 0;}
+			li{list-style: none;float: left;margin: 15px;border: 1px solid salmon;}
+			img{width: 400px;height: 300px;}
+			ul{overflow: hidden;}
+		</style>
+		<script>
+			window.onload=window.onscroll=window.onresize=function(){
+				var aImg=document.getElementsByTagName('img');
+				var scroll=document.documentElement.scrollTop || document.body.scrollTop
+				var client=document.documentElement.clientHeight;
+				var top=client+scroll;
+				
+				for(var i=0;i<aImg.length;i++)
+				{
+					if(aImg[i].offsetTop-50<top)
+					{
+						var src=aImg[i].getAttribute('_src')
+						
+						aImg[i].src=src;
+					}
+				}
+				
+			};
+		</script>
+	</head>
+	<body>
+		<ul>
+			<li>
+				<img _src="img/tuyanchi/1.jpg">
+			</li>
+			<li>
+				<img _src="img/tuyanchi/22.jpg">
+			</li>
+			<li>
+				<img _src="img/tuyanchi/20.jpg">
+			</li>
+			<li>
+				<img _src="img/tuyanchi/13.jpg">
+			</li>
+			<li>
+				<img _src="img/tuyanchi/3.jpg">
+			</li>
+			<li>
+				<img _src="img/tuyanchi/4.jpg">
+			</li>
+			<li>
+				<img _src="img/tuyanchi/8.jpg">
+			</li>
+			<li>
+				<img _src="img/tuyanchi/11.jpg">
+			</li>
+			<li>
+				<img _src="img/tuyanchi/10.jpg">
+			</li>
+			<li>
+				<img _src="img/tuyanchi/7.jpg">
+			</li>
+			<li>
+				<img _src="img/tuyanchi/14.jpg">
+			</li>
+			<li>
+				<img _src="img/tuyanchi/15.jpg">
+			</li>
+			<li>
+				<img _src="img/tuyanchi/16.jpg">
+			</li>
+			<li>
+				<img _src="img/tuyanchi/17.jpg">
+			</li>
+			<li>
+				<img _src="img/tuyanchi/18.jpg">
+			</li>
+			<li>
+				<img _src="img/tuyanchi/19.jpg">
+			</li>
+		</ul>
+	</body>
+</html>
