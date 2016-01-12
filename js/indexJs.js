@@ -8,211 +8,147 @@
 
 window.onload=function(){
 	
+	
+	
+	//首页动画
+
+//(function(){
+//		var opc=document.getElementById('j-ani-opc');
+//		var oImg=document.getElementById('j-img');
+//		var oTxt=document.getElementById('j-ani-txt');
+//		
+//		move(oImg,{opacity:1,filter:'alpha(opacity:100)'},{
+//					duration:1500,
+//					complete:function(){
+//						move(oTxt,{opacity:1,filter:'alpha(opacity:100)'},{duration:1000})
+//							
+//					}
+//			
+//		})
+//		
+//		setTimeout(function(){
+//			move(opc,{opacity:0.3,filter:'alpha(opacity:30)'},{duration:2000,
+//				complete:function(){
+//					opc.style.display='none';
+//				}
+//			})
+//		},4500);
+//		
+//		opc.onclick=function(){
+//			opc.style.display='none';
+//		};
+//
+//})();
+
+
 	/*
-	 *分块运动
+	 *选项卡 
+	 * 
 	 * */
 	(function(){
-		//轮播图
-	var oUl=document.getElementById('j-he-ul');
-	var oHedaer=document.getElementById('j-hedaer')
-	var oLi=oUl.getElementsByTagName('div')[0];
-	var sName=["img/0.jpg","img/1.jpg","img/2.jpg","img/3.jpg"]
-	
-	var oDiv=document.getElementById('pro-div');
-	
-	//创建span
-	var row=1;
-	var col=50;
-	var H=560;
-	var W=1600;
-	var height=H/row;
-	var width=W/col;
-	var aSpan=[];
-	
-	var client=document.documentElement.width;
-	
-	
-	if(client==W)
-	{
-		oUl.style.marginLeft=0;
-	}
-	else if(client<W)
-	{
-		var mL=Math.floor((W-client)/2);
-		oUl.style.marginLeft=-mL+'px';
-	}
-	else if(client>W)
-	{
-		var mL=Math.floor((client-W)/2);
-		oUl.style.marginLeft=mL+'px';
-	}
-	
-	
-	for(var r=0;r<row;r++)
-	{
-		for(var c=0;c<col;c++)
-		{
-			var oSpan=document.createElement('span')
-			oSpan.style.height=height+'px';
-			oSpan.style.width=width+'px';
-			
-			var top=r*height;
-			var left=c*width;
-			oSpan.style.left=left+'px';
-			oSpan.style.top=top+'px';
-			
-			oSpan.style.backgroundPosition=-left+'px -'+top+'px';
-			
-			oLi.appendChild(oSpan);
-			aSpan.push(oSpan);
-		}
-	};
-	
-	var oImg=document.getElementById('j-he-img');
-	var oDown=document.getElementById('j-down');
-	
-	var now=0;
-	var bFlag=false;
-	
-	
-	
-	oDiv.timer=setInterval(function(){
-			now++
-			show();
-		},2500);
-	
-	//浏览器获取焦点
-	window.onfocus=function(){
-		oDiv.timer=setInterval(function(){
-			now++;
-			show();
-		},2500);
-	};
-	
-	//浏览器失去焦点
-	window.onblur=function(){
-		clearInterval(oDiv.timer);
-	};
-	
-	
-	//鼠标停在图片是上
-	oHedaer.onmouseover=function(){
-		clearInterval(oDiv.timer);
-		oDown.style.display='block';
-		oUp.style.display='block'
+		var oB=document.getElementById('ifocus_btn');
+		var aBtn=oB.getElementsByTagName('li');
+		var oP=document.getElementById('ifocus_piclist')
+		var oLi=oP.getElementsByTagName('li')[0];
+		var aT=document.getElementById('ifocus_tx').getElementsByTagName('li');
+		var oUl=oP.getElementsByTagName('ul')[0];
+		var oUl_t=document.getElementById('ifocus_tx').getElementsByTagName('ul')[0];
 		
+		var timer=null;
 		
-	};
-	
-	//鼠标离开图片
-	oHedaer.onmouseout=function(){
-		oDown.style.display='none';
-		oUp.style.display='none'
-		oDiv.timer=setInterval(function(){
-			now++;
-			show();
-		},2500);
-	}
-	
-	
-	//下一张
-	oDown.onclick=function(){
-		if (bFlag)
-			{
-				return;
-			}
-
-			bFlag=true;
-		now++;
-		show();
-		
-	};
-	
-	//s上一张
-	var oUp=document.getElementById('j-up');
-	oUp.onclick=function(){
-		if (bFlag)
-			{
-				return;
-			}
-
-			bFlag=true;
-		
-		now--;
-		show();
-	};
-	
-	function show()
-	{
-		
-		
-		
-			
-			//now++;
-		
-		if(now<=-1)
-		{
-			var url='url('+sName[(-now)%sName.length]+')';
-		}
-		else
-		{
-			var url='url('+sName[now%sName.length]+')';
-		}
-		for(var i=0;i<aSpan.length;i++)
-		{
-			aSpan[i].style.opacity=0;
-			aSpan[i].style.filter=':alpha(opacity:0)' ;
-			aSpan[i].style.backgroundImage=url;
-			
-		}
-		
+		//移入移出 
+		var oW=oLi.offsetHeight;
+		var ow=oUl_t.children[0].offsetHeight;
 		var n=0;
 		
-		var timer=setInterval(function(){
-			
-			
-			
+		for(var i=0;i<aBtn.length;i++)
+		{
 			(function(index){
-				move(aSpan[n],{opacity:1,filter:'alpha(opacity:100)'},{
-					duration:30,
-					complete:function(){
-						
-						if(index==aSpan.length-1)
-						{
-							bFlag=false;
-							
-							if(now<=-1)
-							{
-								oImg.src=sName[(-now)%sName.length];
-							}
-							else
-							{
-								oImg.src=sName[now%sName.length];
-							}
-							
-						}
+				
+				aBtn[i].onmouseover=function(){
+					clearInterval(timer);
+					
+					for(var i=0;i<aBtn.length;i++)
+					{
+						aBtn[i].className='normal';
 					}
+					aBtn[index].className='current';
+					move(oUl,{top:-index*oW},{duration:500})
+//					console.log(-index*oW+'px')
+//					oUl.style.top=-index*oW+'px';
+					oUl_t.style.top=-index*ow+'px';
 					
+					n=index;
+					bFlag=true;
+				};
+				
+				aBtn[i].onmouseout=function(){
 					
-
-					
-				})
-			})(n);
-			n++
-			if(n==aSpan.length)
-			{
-				clearInterval(timer)
-			}
+					timer=setInterval(function(){
+						if(bFlag)
+						{
+							show()
 						
-		},30);
+							n++;
+							if(n==4)
+							{
+								bFlag=false;
+							}
+						}else{
+							n--;
+							show();
+							if(n==0)
+							{
+								bFlag=true;
+							}
+						}
+					},2500)
+				};
+				
+			})(i)
+		}
 		
-	}
-	
-	//轮播图完成
+		
+		
+		var bFlag=true;
+		
+		//循环播放
+		timer=setInterval(function(){
+			if(bFlag)
+			{
+				show()
+			
+				n++;
+				if(n==4)
+				{
+					bFlag=false;
+				}
+			}else{
+				n--;
+				show();
+				if(n==0)
+				{
+					bFlag=true;
+				}
+			}
+				
+				
+		},2500);
+		
+		function show(){
+			for(var i=0;i<aBtn.length;i++)
+				{
+					aBtn[i].className='normal';
+				}
+				aBtn[n].className='current';
+				move(oUl,{top:-n*oW},{duration:500})
+//				console.log(-n*oW+'px')
+				oUl_t.style.top=-n*ow+'px';
+		}
 		
 	})();
-	
-	
+
+
 	
 	/**
 	 * 效果墙
