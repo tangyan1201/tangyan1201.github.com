@@ -59,8 +59,9 @@ body{
 }
 
 .nav-le{
+	width: 1000px;
+	margin: 0 auto;
 	text-align: center;
-	margin-right: 40px;
 	}
 	
 
@@ -78,6 +79,65 @@ body{
 	color: #fff;
 	font-family: "微软雅黑";
 }
+
+
+/*搜索框*/
+.sousuo{
+	width: 300px;
+	height: 30px;
+	position: relative;
+	margin-top: 10px;
+	border: 1px solid #4791FF;
+	
+}
+
+#inp{
+	width: 200px;
+	height: 100%;
+	border: none;
+	outline: none;
+	padding-left: 35px;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+.s-txt{
+	position: absolute;
+	left: 35px;
+	top: 0;
+	width: 200px;
+	height: 100%;
+	color: #ccc;
+	text-align: left;
+	line-height: 30px;
+	font-size: 14px;
+}
+
+.du-logo{
+	display: block;
+	width: 25px;
+	height: 25px;
+	position:absolute;
+	left: 3px;
+	top: 2px;
+	background: url(../img/du-logo.png) no-repeat;
+	z-index: 3;
+}
+
+.suo{
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 65px;
+	height: 100%;
+	line-height: 30px;
+	color: #fff;
+	text-align: center;
+	background: #317EF3;
+	cursor: pointer;
+}
+
 
 /*导航未完*/
 

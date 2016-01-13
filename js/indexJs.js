@@ -12,33 +12,60 @@ window.onload=function(){
 	
 	//首页动画
 
-//(function(){
-//		var opc=document.getElementById('j-ani-opc');
-//		var oImg=document.getElementById('j-img');
-//		var oTxt=document.getElementById('j-ani-txt');
-//		
-//		move(oImg,{opacity:1,filter:'alpha(opacity:100)'},{
-//					duration:1500,
-//					complete:function(){
-//						move(oTxt,{opacity:1,filter:'alpha(opacity:100)'},{duration:1000})
-//							
-//					}
-//			
-//		})
-//		
-//		setTimeout(function(){
-//			move(opc,{opacity:0.3,filter:'alpha(opacity:30)'},{duration:2000,
-//				complete:function(){
-//					opc.style.display='none';
-//				}
-//			})
-//		},4500);
-//		
-//		opc.onclick=function(){
-//			opc.style.display='none';
-//		};
-//
-//})();
+(function(){
+		var opc=document.getElementById('j-ani-opc');
+		var oImg=document.getElementById('j-img');
+		var oTxt=document.getElementById('j-ani-txt');
+		
+		move(oImg,{opacity:1,filter:'alpha(opacity:100)'},{
+					duration:1500,
+					complete:function(){
+						move(oTxt,{opacity:1,filter:'alpha(opacity:100)'},{duration:1000})
+							
+					}
+			
+		})
+		
+		setTimeout(function(){
+			move(opc,{opacity:0.3,filter:'alpha(opacity:30)'},{duration:2000,
+				complete:function(){
+					opc.style.display='none';
+				}
+			})
+		},4500);
+		
+		opc.onclick=function(){
+			opc.style.display='none';
+		};
+
+})();
+
+
+	/*
+	 *搜索框
+	 * */
+	;(function(){
+		var suosuo=document.getElementById('sousuo');
+		var oInp=document.getElementById('inp');
+		var oSpan=document.getElementById('span1');
+		var suo=document.getElementById('suo');
+		
+		 oSpan.onclick=function(){
+		 	oSpan.style.display='none';
+		 	oInp.focus();
+		 };
+		 
+		 oInp.onfocus=function(){
+		 	oSpan.style.display='none';
+		 }
+		 
+		 oInp.onblur=function(){
+		 	if(oInp.value.length==0)
+		 	{
+		 		oSpan.style.display='block'
+		 	}
+		 };
+	})();
 
 
 	/*
