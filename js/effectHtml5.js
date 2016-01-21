@@ -1,4 +1,4 @@
-window.onload=function(){
+ready(function(){
 	
 	 function setStyle3(obj,name,value){
         var str=name.charAt(0).toUpperCase()+name.substring(1);
@@ -62,4 +62,4 @@ window.onload=function(){
 		};
 		
 	})();
-};
+});

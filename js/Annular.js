@@ -1,6 +1,6 @@
 //3D图片环
 
-window.onload=function(){
+ready(function(){
 	(function(){
 		var oUl=document.getElementById('ul');
 		var N=11;
@@ -112,7 +112,7 @@ window.onload=function(){
 		}
 		
 	})();
-};
+});
 
 
 

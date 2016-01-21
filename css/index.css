@@ -65,7 +65,7 @@ body{
 	}
 	
 
-.nav-le li{
+.nav-l li{
 	float: left;
 	width: 100px;
 	font-size: 20px;
@@ -88,7 +88,6 @@ body{
 	position: relative;
 	margin-top: 10px;
 	border: 1px solid #4791FF;
-	
 }
 
 #inp{
@@ -102,27 +101,101 @@ body{
 	top: 0;
 }
 
+/*下拉框*/
+
+.pull{
+	position: absolute;
+	width: 199px;
+	left: 35px;
+	top: 31px;
+	border: 1px solid #b9a082;
+	border-top: none;
+	background: #fff;
+}
+
+.pull li{
+	height: 25px;
+	padding-left: 5px;
+	width: 194px;
+	line-height: 25px;
+	text-align: left;
+	font-size: 16px;
+}
+
+.pull li.on{
+	background: #ccc;
+}
+
+/*搜索文字*/
 .s-txt{
 	position: absolute;
 	left: 35px;
 	top: 0;
 	width: 200px;
 	height: 100%;
-	color: #ccc;
+	color: #999;
 	text-align: left;
 	line-height: 30px;
 	font-size: 14px;
+	z-index: 3;
+	/*overflow: hidden;*/
 }
 
-.du-logo{
-	display: block;
-	width: 25px;
+/*.s-txt li{
+	width: 200px;
+	height: 100%;
+	
+	color: #000;
+	text-align: left;
+	line-height: 30px;
+	font-size: 14px;
+}*/
+
+/*logo*/
+.se{
+	width: 30px;
 	height: 25px;
 	position:absolute;
-	left: 3px;
-	top: 2px;
-	background: url(../img/du-logo.png) no-repeat;
-	z-index: 3;
+	left: 0px;
+	top: 0px;
+	z-index: 4;
+	background: #fff;
+}
+
+.se li{
+	width: 30px;
+	height: 25px;
+	padding-bottom: 5px;
+	display: none;
+}
+
+
+.du-logo{
+	background:#fff url(../img/du-logo.png) no-repeat 3px 3px;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+.logo-360{
+	background:#fff url(../img/360-logo.png) no-repeat 3px 3px;
+	position: absolute;
+	left: 0;
+	top: 28px;
+}
+
+.zhongsou{
+	background:#fff url(../img/zhong-logo.png) no-repeat 3px 3px;
+	position: absolute;
+	left: 0;
+	top: 56px;
+}
+
+.taobao{
+	background:#fff url(../img/tao-logo.png) no-repeat 3px 3px;
+	position: absolute;
+	left: 0;
+	top: 84px;
 }
 
 .suo{
@@ -133,6 +206,7 @@ body{
 	height: 100%;
 	line-height: 30px;
 	color: #fff;
+	font-size: 14px;
 	text-align: center;
 	background: #317EF3;
 	cursor: pointer;

@@ -50,8 +50,9 @@ window.onload=function(){
 		var oSpan=document.getElementById('span1');
 		var suo=document.getElementById('suo');
 		
+//		控制搜索框文字焦点
 		 oSpan.onclick=function(){
-		 	oSpan.style.display='none';
+		 	this.style.display='none';
 		 	oInp.focus();
 		 };
 		 
@@ -64,7 +65,94 @@ window.onload=function(){
 		 	{
 		 		oSpan.style.display='block'
 		 	}
+		 	
 		 };
+		 
+//		 控制logo的显示与隐藏，切换
+		 var oSe=document.getElementById('se');
+		 
+		 var oSH=oSe.children[0].offsetHeight;
+		 var oNum=oSe.children.length;
+		 var aLi=oSe.children;
+		 var bFlag=true;
+		 var aSC=oSpan.children;
+		 var arr=['百度搜索','360搜索','中搜搜索','淘宝网'];
+		 
+		 
+		 
+		 for(var i=0;i<aLi.length;i++)
+		 {
+//		 	(function(index){
+//		 		var oldI=index;
+		 		aLi[i].index=i;
+			 	aLi[i].onclick=function(ev){
+			 		var  _this=this
+			 		var oEvent=ev || event;
+			 		if(bFlag){
+			 			for(var i=0;i<aLi.length;i++){
+			 				
+			 				aLi[i].style.display='block';
+			 			};
+			 			bFlag=false
+			 		}
+			 		else{
+//			 			var oldI=index;
+			 			oSe.removeChild(this);
+			 			oSe.insertBefore(this,oSe.children[0]);
+			 			for(var i=0;i<aLi.length;i++){
+			 				aLi[i].style.top=i*oSH+'px';
+			 				aLi[i].style.display='none'
+			 			}
+						oSpan.innerHTML='';
+//						控制文字的切换
+			 			oSpan.innerHTML=arr[this.index];
+			 			this.style.display='block';
+			 			bFlag=true;
+			 		}
+			 		
+			 		oEvent.cancelBubble=true;
+			 	};
+			 	
+//			 	logo的颜色改变
+			 	aLi[i].onmouseover=function(){
+			 		for(var i=0;i<aLi.length;i++){
+			 			aLi[i].style.backgroundColor='#fff';
+			 		}
+			 		this.style.backgroundColor='#ccc';
+			 	};
+			 	
+			 	aLi[i].onmouseout=function(){
+			 		this.style.backgroundColor='#fff';
+			 	};
+			 	
+//		 	})(i);
+		 }
+		 
+//		 	点击空白处logo隐藏
+		 	document.onclick=function(){
+				for(var i=0;i<aLi.length;i++)
+				{
+					aLi[i].style.display='none';
+				}
+				aLi[0].style.display='block';
+				bFlag=true;
+		 	};
+
+
+			//jsonp
+			 var Ul=document.getElementById('pull');
+	//		 var uLi=Ul.children;
+			oInp.onkeyup=function(){
+				var pArr=[]
+				for(var i=0;i<aLi.length;i++)
+				{
+				var name=aLi[i].getAttribute('data-name');
+					pArr.push(name)
+				}
+				 
+				
+			};
+		 
 	})();
 
 

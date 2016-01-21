@@ -15,4 +15,4 @@
 	.fr{float:right;}
 	table{border-collapse: collapse;}
 	td,th{ padding: 0;}
-	input{outline: none;}
+	input,select{outline: none;}
