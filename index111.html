@@ -2,9 +2,11 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title>首页</title>
 		<link rel="stylesheet" href="css/index.css" />
 		<link rel="stylesheet" href="css/base.css" />
+		<script src="js/jsonp.js" ></script>
 		<script src="js/indexJs.js"></script>
 		<script src="js/move.js"></script>
 	</head>
@@ -31,7 +33,7 @@
 		<!--导航-->
 			<div class="nav clearfix">
 				<div id="" class="nav-le clearfix">
-					<ul>
+					<ul class="nav-l">
 						<li>
 							<a href="index.html">首页</a>
 						</li>
@@ -45,11 +47,26 @@
 							<a href="effectHtml5.html" target="_blank">留言版</a>
 						</li>
 					</ul>
+					<!--logo-->
 					<div class="sousuo fr" id="sousuo">
-						<i class="du-logo"></i>
+						<ul class="se" id="se">
+							<li class="du-logo" style="display: block;" data-name = "baidu"></li>
+							<li class="logo-360" data-name = "lo360"></li>
+							<li class="zhongsou" data-name = "zhongsou"></li>
+							<li class="taobao" data-name = "taobao"></li>
+						</ul>
+						<!--搜索框-->
 						<input type="text" id="inp" />
-						<span class="s-txt" id="span1">百度搜索</span>
-						<span class="suo" id="suo">百度一下</span>
+						<!--下拉框-->
+						<ul id="pull" class="pull">
+							<!--<li>askdlds</li>
+							<li class="on">aaassdsd</li>-->
+						</ul>
+						<!--搜索框文字-->
+						<span class="s-txt" id="span1">
+							百度搜索
+						</span>
+						<span class="suo" id="suo">搜 索</span>
 					</div>
 				</div>
 			
