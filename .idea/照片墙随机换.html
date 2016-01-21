@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="author" content="智能社 - zhinengshe.com">
+<meta name="copyright" content="智能社 - zhinengshe.com">
+<title>智能社 - www.zhinengshe.com</title>
+<style>
+* { margin:0; padding:0; }
+ul { width:510px; height:510px; border:1px solid red; margin:50px auto; }
+li { position:relative; float:left; list-style:none; width:150px; height:150px; margin:10px; }
+img { display:block; width:100%; }
+span { position:absolute; top:0; left:0; width:100%; height:100%; line-height:150px; text-align:center; font-size:50px; font-weight:bold; background:rgba(255, 255, 255, 0.7); color:red;  }
+.active { width:140px; height:140px; border:5px dashed red; }
+input { position:absolute; left:100px; top:100px; width:100px; height:30px; }
+</style>
+<script src="js/move.js"></script>
+<script>
+window.onload=function (){
+	var aLi=document.getElementsByTagName('li');
+	var zIndex=1;
+	
+	// 测试，与效果无关！
+//	for (var i=0; i<aLi.length; i++)
+//	{
+//		var oSpan=document.createElement('span');
+//		oSpan.innerHTML=i;
+//		aLi[i].appendChild(oSpan);
+//	}
+	
+	// 布局转换
+	aPos=[];
+	for (var i=0; i<aLi.length; i++)
+	{
+		aPos.push({
+			left:aLi[i].offsetLeft,
+			top:aLi[i].offsetTop
+		});
+	}
+	
+	for (var i=0; i<aLi.length; i++)
+	{
+		aLi[i].style.position='absolute';
+		aLi[i].style.left=aPos[i].left+'px';
+		aLi[i].style.top=aPos[i].top+'px';
+		aLi[i].style.margin=0;
+	}
+	
+	// 随机换位置
+	var oBtn=document.getElementById('btn');
+	oBtn.onclick=function (){
+		
+		aPos.sort(function (){
+			return Math.random()-0.5;
+		});
+		
+		for (var i=0; i<aLi.length; i++)
+		{
+			move(aLi[i], aPos[i]);
+		}
+	};
+};
+</script>
+</head>
+
+<body>
+	<input type="button" value="换" id="btn" />
+	<ul>
+		<li><img src="img/cat/1.jpg" /></li>
+		<li><img src="img/cat/2.jpg" /></li>
+		<li><img src="img/cat/3.jpg" /></li>
+		
+		<li><img src="img/cat/4.jpg" /></li>
+		<li><img src="img/cat/5.jpg" /></li>
+		<li><img src="img/cat/6.jpg" /></li>
+		
+		<li><img src="img/cat/7.jpg" /></li>
+		<li><img src="img/cat/8.jpg" /></li>
+		<li><img src="img/cat/9.jpg" /></li>
+	</ul>
+</body>
+</html>
+
+
+
+
+
+
+

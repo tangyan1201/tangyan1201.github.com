@@ -1,0 +1,24 @@
+oT.onkeyup=function(){
+jsonp({
+url:'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',
+data:{
+	wd:oT.value	
+},
+success:function(json){
+oUl.innerHTML='';
+var arr=json.s;
+if(arr.length){
+	oUl.style.display='block';
+}else{
+	oUl.style.display='none';
+}
+//DOM
+for(var i=0;i<arr.length; i++)
+{
+var oLi=document.createElement('li');
+oLi.innerHTML=arr[i];
+oUl.appendChild(oLi);
+}
+}	
+});	
+};
