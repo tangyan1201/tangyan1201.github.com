@@ -1,0 +1,167 @@
+body{
+	width: 100%;
+	height: 100%;
+	background: url(../img/25C58PICAVS_1024.jpg) no-repeat;
+	background-size:100%; 
+}
+
+ html,body{
+            height:100%;
+            overflow: hidden;
+        }
+
+.box{
+	width: 700px;
+	height: 400px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -280px;
+	margin-top: -260px;
+	/*transform-style:preserve-3d ;*/
+	/*background: url(../img/xk.png) no-repeat;
+	background-size: 100% 100%;*/
+	/*border: 5px solid saddlebrown;*/
+}
+
+/*
+ * 按钮
+**/
+
+.btn{
+	position: fixed;
+	/*left: 50%;
+	bottom: 80px;*/
+	right: 10px;
+	top: 200px;
+}
+
+/**
+ * 3D颗粒翻转
+ * */
+.box span{
+	position: absolute;
+	transform-style:preserve-3d ;
+}
+
+.box span em{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.box span .gfront{
+	background: url("../img/turn/0.jpg") no-repeat;
+	transform: translateZ(1px);
+}
+
+.box span .gback{
+	background:  url("../img/turn/1.jpg") no-repeat;
+	transform: translateZ(-1px) scale(-1,1);
+}
+
+/*
+ *翻页
+ * */
+
+.page{
+    width:50%;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top:0;
+
+    transform-origin: left center;
+    transform-style: preserve-3d;
+    z-index: 3;
+
+    transition: 1s all ease;
+    transform:perspective(800px) rotateY(0deg);
+}
+.page div{
+    width:100%;
+    height:100%;
+    position: absolute;
+    left: 0;
+    top:0;
+}
+.ffront{
+    background: url("../img/turn/0.jpg") no-repeat right top;
+    z-index: 2;
+    backface-visibility: hidden;
+}
+.fback{
+    background: url("../img/turn/1.jpg") no-repeat;
+    z-index: 1;
+    transform: scale(-1,1);
+}
+
+.page2{
+    width:50%;
+    height:100%;
+    position: absolute;
+    right: 0;
+    top:0;
+    background: url("../img/turn/1.jpg") no-repeat right top;
+    z-index: 2;
+}
+
+/*爆炸
+ * 
+ */
+
+.box i{
+	position: absolute;
+}
+
+
+/*
+ * 立方体
+ * */
+
+.cubic{
+	width:700px;
+	height: 400px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	transform-style:preserve-3d ;
+	transform: /*perspective(15000px)*/ rotateX(0deg) rotateY(0deg);
+}
+
+.cubic div{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 700px;
+	height: 400px;
+	
+}
+
+.above{
+	background: url(../img/turn/0.jpg) no-repeat;
+	transform: translateZ(350px);
+}
+
+.after{
+	background: url(../img/turn/2.jpg) no-repeat;
+	transform:  translateZ(-350px);
+}
+
+.left{
+	background: url(../img/turn/3.jpg) no-repeat;
+	transform:  translateX(-350px) rotateY(90deg);
+}
+
+.right{
+	background: url(../img/turn/1.jpg) no-repeat;
+	transform: translateX(350px) rotateY(90deg);
+}
+
+
+
+
+
+

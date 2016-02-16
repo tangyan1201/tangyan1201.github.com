@@ -1,0 +1,17 @@
+ @charset "utf-8";
+/* CSS Document */
+	*{ padding:0; margin:0;line-height:100%;}
+	a{ color:#000; text-decoration:none;}
+	li{ list-style:none;}
+	body{ font-size:12px; }
+		/*line-height:12px 代表行高100% ， 不清除，也不再代码里加行高，行高就不是字的高度*/
+	h1,h2,h3,h4,h5,h6,b,strong{ font-weight: normal; font-size: 100%;}
+	i,em{font-style: normal;}
+	img{border: none; vertical-align: top;}
+	a img{ border: none;}
+	.clearfix:after{ display: block; clear: both; content: '';}
+	.clearfix{zoom: 1;}  /*为了兼容IE浏览器*/
+	.fl{float: left;}
+	.fr{float:right;}
+	table{border-collapse: collapse;}
+	td,th{ padding: 0;}

@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="author" >
+<meta name="copyright" >
+<title></title>
+<style>
+* { margin:0; padding:0; }
+.box { margin:50px auto; text-align:center; }
+.box input { width:100px; height:40px; line-height:40px; text-align:center; font-size:28px; }
+#div1 { position:absolute; bottom:0; left:0; width:100%; text-align:center; }
+img { width:64px; height:64px; }
+</style>
+<script>
+window.onload=function (){
+	var oDiv=document.getElementById('div1');
+	var aImg=document.getElementsByTagName('img');
+	var maxWidth=128;
+	var maxHeight=128;
+	
+	// 测试
+//	var aInp=document.getElementsByTagName('input');
+	
+	document.onmousemove=function (ev){
+		var oEvent=ev || event;
+		
+		for (var i=0; i<aImg.length; i++)
+		{
+			var left=aImg[i].offsetLeft;
+			var top=aImg[i].offsetTop+oDiv.offsetTop; 
+			var x=left+aImg[i].offsetWidth/2;
+			var y=top+aImg[i].offsetHeight/2;
+			
+			var a=oEvent.clientX-x;
+			var b=y-oEvent.clientY;
+			
+			var c=Math.sqrt(a*a+b*b);
+			
+			// 感应距离
+			var scale=1-c/500; 
+			(scale<0.5) && (scale=0.5)
+			
+//			aInp[i].value=scale.toFixed(2);
+			
+			aImg[i].style.width=scale*maxWidth+'px';
+			aImg[i].style.height=scale*maxHeight+'px';
+		}
+	};
+};
+</script>
+</head>
+
+<body>
+	<!--<div class="box">
+		<input type="text" />
+		<input type="text" />
+		<input type="text" />
+		<input type="text" />
+		<input type="text" />
+	</div>-->
+	
+	<div id="div1">
+		<img src="img/apple/1.png" />
+		<img src="img/apple/2.png" />
+		<img src="img/apple/3.png" />
+		<img src="img/apple/4.png" />
+		<img src="img/apple/5.png" />
+	</div>
+</body>
+</html>
+
+
+
+
+
+
+
+

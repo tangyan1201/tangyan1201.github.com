@@ -1,0 +1,86 @@
+/*3D图片环*/
+
+body{
+	background: #000;
+}
+
+.ul{
+	width: 140px;
+	height: 200px;
+	/*background: #ccc;*/
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -70px;
+	margin-top: -100px;
+	
+	-webkit-transform: perspective(1400px) rotateX(-15deg);
+	-moz-transform: perspective(1400px) rotateX(-15deg);
+	-ms-transform: perspective(1400px) rotateX(-15deg);
+	
+	-webkit-transform-style:preserve-3d ;
+	-moz-transform-style:preserve-3d ;
+	-ms-transform-style:preserve-3d ;
+	
+}
+
+
+.ul li{
+	width: 140px;
+	height: 200px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	
+	transition: 1s all ease; 
+	
+	box-shadow: 0 0 10px 2px #fff;
+	border-radius: 5px;
+	
+	-webkit-box-reflect:below 10px -webkit-linear-gradient(rgba(155,255,255,0) 50%, rgba(255,255,255,0.5));
+	/*background: -moz-linear-gradient(top, white, white 50%, rgba(255,255,255,0) 50%, rgba(255,255,255,0.5)),-moz-element(#eml)bottom left no-repeat;*/
+}
+
+/*#eml{
+	   	position: relative;
+	   	/* 给倒影留下空间 */
+	   /*	margin-bottom: 200px;*/
+
+	}
+
+/*#eml:before {
+	   content:""; /* needed or nothing will be shown */
+		/*background: -moz-linear-gradient(top, white, white 50%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0)),-moz-element(#eml)bottom left no-repeat;
+	   	-moz-transform: scaleY(-1); */
+	  	/* flip the image vertically */
+	   /* position: absolute;
+	   height:200px;
+	   width: 140px; 
+	   top: 200px;
+	   left:0px;
+
+	}*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
