@@ -120,6 +120,7 @@ body{
 	line-height: 25px;
 	text-align: left;
 	font-size: 16px;
+	cursor: pointer;
 }
 
 .pull li.on{

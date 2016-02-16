@@ -1,29 +1,30 @@
 //turn
 
 ready(function(){
-	var i=0;
 	var oBox=document.querySelector('.box');
 	oBox.style.backgroundImage='url(img/turn/0.jpg)';
-	//3D颗粒翻转
+	 var F=true;
+	 var G=true;
+	//3D颗粒翻转 
 	(function(){
 		
 		var oGrain=document.getElementById('grain');
 
-		var a=i;
 		//点击
 			var iNow=0;
             var bReady=true;
             oGrain.onclick=function(){
+            	F=true;
             	oBox.style.backgroundImage='none';
             	
-            	if(a==0)
+            	if(G)
 		    	{
 		    		oBox.innerHTML='none';
 		    		var R=4;
 					var C=7;
 					
 					for(var r=0;r<R;r++)
-					{
+					{ 
 						for(var c=0;c<C;c++)
 						{
 							var oSpan=document.createElement('span');
@@ -43,7 +44,7 @@ ready(function(){
 				            oSpan.dataset.c=c;
 						}
 					}
-					a=2;
+					G=false;
 		    	}
             	
                 if(bReady==false){
@@ -86,18 +87,16 @@ ready(function(){
 	(function(){
 		
 		var Flip=document.getElementById('flip');
-		var b=i+1;
         var iNow=0;
         var bReady=true;
         Flip.onclick=function(){
-        	
+        	G=true;
         	//创建 子集
-	    	if(b==1)
+	    	if(F)
 			{
-				oBox.innerHTML='none';
 				oBox.style.backgroundImage='url(img/turn/0.jpg)';
 				oBox.innerHTML='<div class="page"><div class="front2"></div><div class="back2"></div></div><div class="page2"></div>'
-				b=3;
+				F=false;
 				return;
 			}
 			

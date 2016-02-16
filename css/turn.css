@@ -5,6 +5,11 @@ body{
 	background-size:100%; 
 }
 
+ html,body{
+            height:100%;
+            overflow: hidden;
+        }
+
 .box{
 	width: 700px;
 	height: 400px;
@@ -13,6 +18,7 @@ body{
 	top: 50%;
 	margin-left: -280px;
 	margin-top: -260px;
+	/*transform-style:preserve-3d ;*/
 	/*background: url(../img/xk.png) no-repeat;
 	background-size: 100% 100%;*/
 	/*border: 5px solid saddlebrown;*/
@@ -46,18 +52,18 @@ body{
 	height: 100%;
 }
 
-.box span .front{
+.box span .gfront{
 	background: url("../img/turn/0.jpg") no-repeat;
 	transform: translateZ(1px);
 }
 
-.box span .back{
+.box span .gback{
 	background:  url("../img/turn/1.jpg") no-repeat;
 	transform: translateZ(-1px) scale(-1,1);
 }
 
 /*
- *爆炸
+ *翻页
  * */
 
 .page{
@@ -81,12 +87,12 @@ body{
     left: 0;
     top:0;
 }
-.front2{
+.ffront{
     background: url("../img/turn/0.jpg") no-repeat right top;
     z-index: 2;
     backface-visibility: hidden;
 }
-.back2{
+.fback{
     background: url("../img/turn/1.jpg") no-repeat;
     z-index: 1;
     transform: scale(-1,1);
@@ -101,6 +107,61 @@ body{
     background: url("../img/turn/1.jpg") no-repeat right top;
     z-index: 2;
 }
+
+/*爆炸
+ * 
+ */
+
+.box i{
+	position: absolute;
+}
+
+
+/*
+ * 立方体
+ * */
+
+.cubic{
+	width:700px;
+	height: 400px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	transform-style:preserve-3d ;
+	transform: /*perspective(15000px)*/ rotateX(0deg) rotateY(0deg);
+}
+
+.cubic div{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 700px;
+	height: 400px;
+	
+}
+
+.above{
+	background: url(../img/turn/0.jpg) no-repeat;
+	transform: translateZ(350px);
+}
+
+.after{
+	background: url(../img/turn/2.jpg) no-repeat;
+	transform:  translateZ(-350px);
+}
+
+.left{
+	background: url(../img/turn/3.jpg) no-repeat;
+	transform:  translateX(-350px) rotateY(90deg);
+}
+
+.right{
+	background: url(../img/turn/1.jpg) no-repeat;
+	transform: translateX(350px) rotateY(90deg);
+}
+
+
+
 
 
 
