@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>window屏保</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none
+        }
+        html,body{
+            overflow: hidden;
+        }
+        body{
+            background: #000;
+        }
+        #c1{
+            background: #000;
+        }
+    </style>
+    <script>
+        function rnd(n,m){
+            return parseInt(Math.random()*(m-n)+n);
+        }
+        window.onload=function(){
+            var oC=document.getElementById('c1');
+
+            var gd=oC.getContext('2d');
+
+            var winW=document.documentElement.clientWidth;
+            var winH=document.documentElement.clientHeight;
+            //设置画布大小
+            oC.width=winW;
+            oC.height=winH;
+
+            var N=3;
+
+            var LEN=10; //个数
+
+            var oldArr=[]; //[[{},{},{}],[],[]]
+
+            var aPoint=[]; //存放点
+            for(var i=0; i<N; i++){
+                aPoint[i]={
+                    x:rnd(0,winW),
+                    y:rnd(0,winH),
+                    iSpeedX:rnd(-10,10),
+                    iSpeedY:rnd(-10,10)
+                };
+            }
+
+            //走
+            setInterval(function(){
+                //画出来
+                for(var i=0; i<aPoint.length; i++){
+                    drawRect(aPoint[i]);
+                }
+
+                //开走
+                for(var i=0; i<aPoint.length; i++){
+                    if(aPoint[i].y>=winH){
+                        aPoint[i].y=winH;
+                        aPoint[i].iSpeedY*=-1;
+                    }
+                    if(aPoint[i].y<=0){
+                        aPoint[i].y=0;
+                        aPoint[i].iSpeedY*=-1;
+                    }
+                    if(aPoint[i].x<=0){
+                        aPoint[i].x=0;
+                        aPoint[i].iSpeedX*=-1;
+                    }
+                    if(aPoint[i].x>=winW){
+                        aPoint[i].x=winW;
+                        aPoint[i].iSpeedX*=-1;
+                    }
+                    aPoint[i].x+=aPoint[i].iSpeedX;
+                    aPoint[i].y+=aPoint[i].iSpeedY;
+                }
+
+                //连线
+                gd.beginPath();
+                gd.strokeStyle='#fff';
+                gd.moveTo(aPoint[0].x,aPoint[0].y);
+                for(var i=1; i<aPoint.length; i++){
+                    gd.lineTo(aPoint[i].x, aPoint[i].y);
+                }
+                gd.closePath();
+                gd.stroke();
+
+                //尾巴
+                var arr=[];
+                for(var i=0; i<aPoint.length; i++){
+                    arr[i]={
+                        x:aPoint[i].x,
+                        y:aPoint[i].y
+                    };
+                }
+                oldArr.push(arr);
+
+                while(oldArr.length>LEN){
+                    oldArr.shift();
+                }
+
+
+                //画尾巴
+                for(var i=0; i<oldArr.length; i++){
+                    var opacity= i/(oldArr.length-1);
+                    gd.beginPath();
+                    gd.strokeStyle='rgba(255,255,255,'+opacity+')';
+                    gd.moveTo(oldArr[i][0].x,oldArr[i][0].y);
+
+                    for(var j=0; j<oldArr[i].length; j++){
+                        gd.lineTo(oldArr[i][j].x,oldArr[i][j].y);
+                    }
+                    gd.closePath();
+                    gd.stroke();
+                }
+            },16);
+
+            function drawRect(p){  //画点
+                var pW=1;
+                var pH=1;
+                gd.fillStyle='#fff';
+                gd.fillRect(p.x-pW/2, p.y-pH/2, pW,pH);
+            }
+
+            setInterval(function(){
+                gd.clearRect(0,0,oC.width,oC.height);
+            },2000);
+        };
+    </script>
+</head>
+<body>
+    <canvas id="c1"></canvas>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

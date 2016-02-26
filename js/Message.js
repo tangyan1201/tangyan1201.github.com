@@ -4,7 +4,7 @@ window.onload=function(){
 	var oBox=document.getElementById('reply_box');
 	var oPageBox=document.getElementById('page_box');
 	
-	var URL='http://tangyan1201.github.io/PHP/weibo.php';
+	var URL='weibo.php';
 	
 	var nowPage=1;
 	

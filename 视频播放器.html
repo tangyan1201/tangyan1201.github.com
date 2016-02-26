@@ -1,0 +1,230 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>视频播放器</title>
+<link href="css/look.css" type="text/css" rel="stylesheet" />
+<script>
+	window.onload=function(){
+		var oV=document.getElementById('v1');
+		var oPlay=document.getElementById('play');
+		var oPause=document.getElementById('pause');
+		var oStop=document.getElementById('stop');
+		var oCurrentTime=document.getElementById('curTime');
+		var oTotalTime=document.getElementById('totalTime');
+		var oLastPB=document.querySelector('.last_play_btn');
+		var oScreen=document.querySelector('.screen');
+		//取
+		var playTime=localStorage.getItem('play_time');
+		if(playTime){
+			oLastPB.style.display='block';
+
+			oLastPB.onclick=function(){
+				var t=confirm('是否从上一次那个位置开始播放？');
+				if(t){
+					oV.currentTime=playTime;
+					fnPlay();
+				}else{
+					oV.currentTime=0;
+					fnPlay();
+				}
+			};
+		}
+
+
+		var fnPlay=function(){
+			oV.play();
+			oPlay.style.display='none';
+			oPause.style.display='block';
+		};
+		var fnPause=function(){
+			oV.pause();
+			oPlay.style.display='block';
+			oPause.style.display='none';
+		};
+
+		//1. 播放、暂停、停止、全屏
+		oPlay.onclick=function(){
+			fnPlay();
+		};
+		oPause.onclick=function(){
+			fnPause();
+		};
+		oStop.onclick=function(){
+			fnPause();
+			oV.currentTime=0;
+		};
+		oScreen.onclick=function(){
+			oV.webkitRequestFullScreen();
+		};
+		
+
+		//2 播放进度
+		var oSpeedThis=document.querySelector('.speed_this');
+		var oButton=oSpeedThis.children[0];
+		var oSpeed=document.querySelector('.speed');
+
+		oV.ontimeupdate=function(){
+			var scale=oV.currentTime/oV.duration;
+			oSpeedThis.style.width=scale*100+'%';
+
+			oCurrentTime.innerHTML=parseInt(oV.currentTime/60)+':'+parseInt(oV.currentTime%60);
+
+			//存储
+			localStorage.setItem('play_time',oV.currentTime);
+		};
+
+		oButton.onmousedown=function(ev){
+			var disX=ev.clientX-this.offsetLeft-this.offsetWidth;
+			document.onmousemove=function(ev){
+				var l=ev.clientX-disX;
+
+				var scale=l/oSpeed.offsetWidth;
+
+				scale<=0 && (scale=0);
+				scale>=1 && (scale=1);
+				oSpeedThis.style.width=scale*100+'%';
+
+				oV.currentTime=oV.duration*scale;
+			};
+			document.onmouseup=function(){
+				document.onmousemove=null;
+				document.onmouseup=null;
+
+				fnPlay();
+			};
+			return false;
+		};
+		//点击调整进度
+		oSpeed.onclick=function(ev){
+			var l=ev.clientX-oSpeed.getBoundingClientRect().left;
+			var scale=l/oSpeed.offsetWidth;
+
+			oV.currentTime=oV.duration*scale;
+
+			fnPlay();
+		};
+
+		//3. 缓冲进度
+		var oSpeedBuffer=document.querySelector('.speed_buffer');
+
+		oV.onprogress=function(){
+			var scale=oV.buffered.end(0)/oV.duration;
+
+			oSpeedBuffer.style.width=scale*100+'%';
+
+			//总时间
+			oTotalTime.innerHTML=parseInt(oV.duration/60)+':'+parseInt(oV.duration%60);
+		};
+
+		//音量
+		var oImg=document.querySelector('.full img');
+
+		var bM=true;
+		oImg.onclick=function(){
+			if(bM){
+				oV.muted=true;
+				this.style.background='red';
+			}else{
+				oV.muted=false;
+				this.style.background='';
+			}
+			bM=!bM;
+		};
+
+		(function(){
+			var oVolumeThis=document.querySelector('.volume_this');
+			var oVolume=document.querySelector('.volume');
+			var oBtn=document.querySelector('.volume_this .button');
+			oBtn.onmousedown=function(ev){
+				var disX=ev.clientX-this.offsetLeft-this.offsetWidth;
+
+				document.onmousemove=function(ev){
+					var l=ev.clientX-disX;
+					var scale=l/oVolume.offsetWidth;
+					scale<=0 && (scale=0);
+					scale>=1 && (scale=1);
+
+					oVolumeThis.style.width=scale*100+'%';
+
+					oV.volume=scale;
+				};
+				document.onmouseup=function(){
+					document.onmousemove=null;
+					document.onmouseup=null;
+				};
+				return false;
+			};
+		})();
+
+		//其他
+		oV.onended=function(){
+//			alert('over');
+		};
+		oV.oncanplay=function(){
+//			alert('canplay');
+		};
+	};
+</script>
+</head>
+
+<body>
+<a href="javascript:;" class="last_play_btn" style="display: none;">是否从上一次位置播放</a>
+<div class="videoBox">
+	<div class="video_list" style="width:0%;">
+    	<dl class="list">
+        	<dt><span>播放列表</span></dt>
+        	<dd><a href="#">影片剪辑</a><span>20分15秒</span></dd>
+        </dl>
+        <a href="javascript:;" class="listBtnContraction">&nbsp;</a>
+        <a href="javascript:;" class="listBtnOpen">&nbsp;</a>
+    </div>
+    <div class="video_play" style="width:100%;">
+    	<div class="video">
+			<div id="video_open_div" style="display:none;">
+				<img src="img/loading.png" class="loading" alt="" style="display:none;" />
+				<input type="button" class="open" value="" />
+				<div class="openLink">
+					<input type="text" value="" class="input" />
+					<input type="button" value="" class="openBtn" />
+				</div>
+			</div>
+			<div id="video_div" style="display:block;">
+				<video id="v1" width="100%" height="100%" src="http://images.sohu.com/ytv/SH/Coke/64036020120714021103.mp4"></video>
+			</div>
+        </div>
+        <div class="videoBar">
+        	<!--播放 暂停 等操作部分-->
+            <div class="play">
+                <img id="stop" src="img/look/stop.png" alt="www.zhinengshe.com" />
+				<img id="prev" src="img/look/prev.jpg" alt="www.zhinengshe.com" />
+				<img id="play" src="img/look/play.jpg" alt="www.zhinengshe.com" />
+				<img id="pause" src="img/look/pause.jpg" alt="www.zhinengshe.com" style="display:none;" />
+				<img id="next" src="img/look/next.jpg" alt="www.zhinengshe.com" />
+            </div>
+            <!--全屏-->
+             <div class="screen" style="width: 40px; height: 40px; background: url(img/look/full_screen.jpg) no-repeat center center;">
+            </div>
+            <!--声音-->
+            <div class="full">
+            	<div class="timer">
+                	<span class="timeThis" id="curTime">00:00</span>/<span id="totalTime">00:00</span>
+                </div>
+                
+                <div class="volume">
+                    <div class="volume_this" style="width:100%;"><div class="button"></div></div>
+                </div>
+                <img src="img/look/horn.png" style="float:right; margin-top:13px; margin-right:10px;" />
+            </div>
+           
+        </div>
+        <!--进度条-->
+        <div class="speed">
+            <div class="speed_buffer" style="width:0%;"></div>
+            <div class="speed_this" style="width:0%;"><div class="button"></div></div>
+        </div>
+    </div>
+    
+</div>
+</body>
+</html>

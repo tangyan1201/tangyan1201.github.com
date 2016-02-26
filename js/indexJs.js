@@ -76,14 +76,12 @@ window.onload=function(){
 		 var aLi=oSe.children;
 		 var bFlag=true;
 		 var aSC=oSpan.children;
-		 var arr=['百度搜索','360搜索','中搜搜索','淘宝网'];
+		 var arr=['百度搜索','360搜索'];
 		 
 		 
 		 
 		 for(var i=0;i<aLi.length;i++)
 		 {
-//		 	(function(index){
-//		 		var oldI=index;
 		 		aLi[i].index=i;
 			 	aLi[i].onclick=function(ev){
 			 		var  _this=this
@@ -125,7 +123,6 @@ window.onload=function(){
 			 		this.style.backgroundColor='#fff';
 			 	};
 			 	
-//		 	})(i);
 		 }
 		 
 //		 	点击空白处logo隐藏
@@ -141,132 +138,242 @@ window.onload=function(){
 
 			//jsonp
 			 var Ul=document.getElementById('pull');
-	//		 var uLi=Ul.children;
 			var iNow=-1;
 			
 			var oldvalue='';
-			oInp.onkeyup=function(){
-				var name=oSpan.innerHTML.trim();
+			
+			
+			//输入文字的操作
+			oInp.onkeyup=function(ev){
+				var name=oSe.children[0].getAttribute('data-name');
+				var oEvent=ev || event;
+				if(oEvent.keyCode==40 || oEvent.keyCode==38){
+					return;	
+				}
+				
+				if(oEvent.keyCode==13){
+					caseName(name);
+				}
 				
 				switch(name)
 				{
-					case '百度搜索':
-					console.log(oSpan.innerHTML)
-							jsonp({
-								url:'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su&encodein=utf-8',
-								data:{
-									wd:oInp.value,
-								},
-								success:function(json){
-									Ul.innerHTML='';
-									
-									var pArr=json.s;
-									
-									if(pArr.length)
-									{
-										Ul.style.display='block';
-									}
-									else
-									{
-										Ul.style.display='none';
-									}
-									//创建li
-									for(var i=0;i<pArr.length;i++)
-									{
-										var oLi=document.createElement('li');
-										oLi.innerHTML=pArr[i];
-										Ul.appendChild(oLi);
-										
-										(function(index){
-											oLi.onmouseover=function(){
-												
-												for(var i=0;i<Ul.children.length;i++)
-												{
-													Ul.children[i].className='';
-												}
-												this.className='on';
-												iNow=index;
-											};
-											
-											oLi.onmouseout=function(){
-												for(var i=0;i<Ul.children.length;i++)
-												{
-													Ul.children[i].className='';
-												}
-											};
-										})(i)
-									}
-								}
-							});
+					case 'baidu':
+						jsonpDao({
+						url:'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',
+						scuLi:'https://www.baidu.com/s?wd='
+						})
+					break;
 						
-						break;
-						
-						case '360搜索':
-						console.log(360)
-						jsonp({
-								url:'http://sug.so.360.cn/suggest',
-								data:{
-									word:oInp.value,
-								},
-								cbName:'callback',
-								success:function(json){
-									Ul.innerHTML='';
-									
-									var pArr=json.s;
-									
-									if(pArr.length)
-									{
-										Ul.style.display='block';
-									}
-									else
-									{
-										Ul.style.display='none';
-									}
-									
-									//创建li
-									for(var i=0;i<pArr.length;i++)
-									{
-										var oLi=document.createElement('li');
-										oLi.innerHTML=pArr[i];
-										Ul.appendChild(oLi);
-									}
-								}
-							});
-							break;
-							
-							default:jsonp({
-								url:'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',
-								data:{
-									wd:oInp.value,
-								},
-								success:function(json){
-									Ul.innerHTML='';
-									
-									var pArr=json.s;
-									
-									if(pArr.length)
-									{
-										Ul.style.display='block';
-									}
-									else
-									{
-										Ul.style.display='none';
-									}
-									
-									//创建li
-									for(var j=0;j<pArr.length;j++)
-									{
-										var oLi=document.createElement('li');
-										oLi.innerHTML=pArr[j];
-										Ul.appendChild(oLi);
-									}
-								}
-							});
+					case 'logo-360':
+					jsonpDao({
+					url:'https://sug.so.360.cn/suggest?callback=suggest_so&encodein=utf-8&encodeout=utf-8&word=',
+					cbName:'callback',
+					scuLi:'https://www.so.com/s?ie=utf-8&q='
+					})
+					break;
+					
+//					case 'zhongsou':
+//					jsonpDao({
+//					url:'http://www.zhongsou.com/third.cgi?w=',
+//					cbName:'callback',
+//					scuLi:'http://www.zhongsou.com/third.cgi?w='
+//					})	
+//					break;
+					
+					default:
+					jsonpDao({
+						url:'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',
+						scuLi:'https://www.baidu.com/s?wd='
+					});
+				}
+				oldValue=oInp.value;	
+			};
+			
+			//点击搜索的时候
+			suo.onclick=function(){
+				var name=oSe.children[0].getAttribute('data-name');
+				caseName(name);
+			}
+			
+			
+			//输入完成对创建的li做操作
+			
+			oInp.onkeydown=function(ev){
+				var aLi=Ul.children;
+				
+				var oEvent=ev || event;
+				if(oEvent.keyCode==40)
+				{
+					iNow++;
+					if(iNow==aLi.length)
+					{
+						iNow=-1;
+					}
+					for(var i=0; i<aLi.length; i++){
+						aLi[i].className='';
+					}
+					
+					if(iNow==-1)
+					{
+						oInp.value=oldValue;
+					}
+					else
+					{
+						oInp.value=aLi[iNow].innerHTML;
+						aLi[iNow].className='on'
+					}
 				}
 				
-			
+				if(oEvent.keyCode==38)
+				{
+					iNow--;
+					if(iNow==-2)
+					{
+						iNow=aLi.length-1;
+					}
+					for(var i=0; i<aLi.length; i++){
+						aLi[i].className='';
+					}
+					
+					if(iNow==-1)
+					{
+						oInp.value=oldValue;
+					}
+					else
+					{
+						oInp.value=aLi[iNow].innerHTML;
+						aLi[iNow].className='on'
+					}
+				}
 				
 			};
+			
+			//jsonp封装调用
+			
+			function jsonpDao(jsonpc)
+			{
+				jsonpc=jsonpc || {};
+				if(!jsonpc.url)return;
+				jsonp({
+						url:jsonpc.url,
+						data:{
+							wd:oInp.value,
+							encodein:'utf-8',
+							encodeout:'utf-8'
+						},
+						cbName:jsonpc.cbName || 'cb',
+						success:function(json){
+							Ul.innerHTML='';
+							
+							var pArr=json.s;
+							
+							Li(pArr,jsonpc.scuLi);
+//							
+						}
+					});
+			}
+			
+			
+			//case的封装
+			function caseName(name)
+			{
+				switch(name)
+				{
+					case 'baidu':
+					window.open('https://www.baidu.com/s?wd='+oInp.value,'_self');
+					oInp.value='';
+					Ul.style.display='none';
+					break;
+					
+					case 'logo-360':
+					window.open('https://www.so.com/s?ie=utf-8&q='+oInp.value);
+					oInp.value='';
+					Ul.style.display='none';
+					break;
+					
+//					case 'zhongsou':
+//					window.open('http://www.zhongsou.com/third.cgi?w='+oInp.value);
+//					oInp.value='';
+//					Ul.style.display='none';
+//					break;
+					
+					default:
+					window.open('https://www.baidu.com/s?wd='+oInp.value,'_self');
+					oInp.value='';
+					Ul.style.display='none';
+				}
+			}
+			
+			//创建li
+			function Li(Arr,Url)
+			{
+				if(Arr.length)
+				{
+					Ul.style.display='block';
+				}
+				else
+				{
+					Ul.style.display='none';
+				}
+				
+				//创建li
+				for(var j=0;j<Arr.length;j++)
+				{
+					var oLi=document.createElement('li');
+					oLi.innerHTML=Arr[j];
+					Ul.appendChild(oLi);
+					
+					(function(index){
+						oLi.onmouseover=function(){
+							
+							for(var i=0;i<Ul.children.length;i++)
+							{
+								Ul.children[i].className='';
+							}
+							this.className='on';
+							iNow=index;
+						};
+						
+						oLi.onmouseout=function(){
+							for(var i=0;i<Ul.children.length;i++)
+							{
+								Ul.children[i].className='';
+							}
+						};
+						
+						oLi.onclick=function(){
+							var name=oSe.children[0].getAttribute('data-name');
+							switch(name)
+							{
+								case 'baidu':
+								window.open(Url+this.innerHTML,'_self');
+								oInp.value='';
+								Ul.style.display='none';
+								break;
+								
+								case 'logo-360':
+								window.open(Url+this.innerHTML);
+								oInp.value='';
+								Ul.style.display='none';
+								break;
+								
+//								case 'zhongsou':
+//								window.open(Url+oInp.value);
+//								oInp.value='';
+//								Ul.style.display='none';
+//								break;
+								
+								default:
+								window.open(Url+this.innerHTML,'_self');
+								oInp.value='';
+								Ul.style.display='none';
+							}
+											
+						};
+						
+					})(i)
+				}
+			}
 
 	})();
 

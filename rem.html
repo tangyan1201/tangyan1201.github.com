@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <title>rem</title>
+    <style>
+        *{margin:0;padding:0;list-style:none;}
+        a{text-decoration:none;}
+        i{font-style:normal;}
+        html,body{height:100%;}
+        html{font-size:20px;}
+        .wrap{width:16rem;margin:1rem auto 0;}
+        header{
+            width:16rem;
+            height:2.525rem;
+            overflow:hidden;
+            /*background:url(imgRem/topT.jpg) repeat-x left top;*/
+            background:#ccc;
+            position:relative;
+        }
+        header a.back{width:3.025rem;height:1.4rem;position:absolute;left:0.55rem;margin-top:0.6rem;}
+        a.back img{width:100%;height:100%;}
+        header h1{width:100%;height:2.525rem;text-align:center;}
+        header h1 a img{width:3.7rem;height:0.975rem;}
+        .banner{width:16rem;position:relative;}
+        .banner ul{height:6.675rem;margin-bottom:0.5rem;}
+        .banner ul li{width:16rem;height:6.675rem;float:left;}
+        .banner ul li img{width:16rem;height:6.675rem;}
+        .banner ol{width:2.5rem;overflow:hidden;position:absolute;left:50%;margin-left:-1.25rem;}
+        .banner ol li{width:0.25rem;height:0.25rem;background:#a9a9a9;border-radius:50%;float:left;margin-left:0.25rem;}
+        .banner ol li.on{background:#ff4300;}
+        .list{width:16rem;overflow:hidden;display:-webkit-box;}
+        .list dl{-webkit-box-flex:1;margin-top:1rem;}
+        .list dl dt a{width:2rem;height:2rem;line-height:2rem;border-radius:50%;text-align:center;display:block;margin:0 auto;}
+        .list dl dt a img.icon1{ width:0.8rem;height:0.725rem;}
+        .list dl dt a img.icon2{ width:0.95rem;height:0.975rem;}
+        .list dl dt a img.icon3{ width:0.9rem;height:0.9rem;}
+        .list dl dt a img.icon4{ width:0.8rem;height:0.8rem;}
+        .list dl dt a img.icon5{ width:0.85rem;height:0.6rem;}
+        .list dl dt a img.icon6{ width:0.825rem;height:0.825rem;}
+        .list dl dt a img.icon7{ width:0.575rem;height:0.85rem;}
+        .list dl dt a img.icon8{ width:0.6rem;height:0.8rem;}
+        .list dl dd{font-size:0.6rem;line-height:1.3rem;text-align:center;}
+        .list dl dd a{color:#999;}
+        .con{margin:0 0.5rem 0.5rem;}
+        .title{height:1.25rem;margin:1.55rem 0 0.75rem;padding-bottom:0.5rem;box-sizing:border-box;border-bottom:4px solid #dcdcdc;}
+        .title i{display:block;width:4px;height:0.75rem;background:#d51938;float:left;}
+        .title a.tit{display:block;font-size:0.7rem;text-indent:0.45rem;float:left;font-weight:bold;color:#333;}
+        .title a.top{display:block;font-size:0.7rem;float:right;color:#333;font-family:Arial;}
+        .con ul{height:3rem;margin-bottom:0.5rem;background:red;display:-webkit-box;}
+        .con ul li.num{width:1.5rem;height:3rem;line-height:3rem;font-family:Arial;font-weight:bold;text-align:center;font-size:1.2rem;color:#fff;background:#ff9d00;}
+        .con ul li.pic{width:4.5rem;height:3rem;overflow:hidden;}
+        .con ul li.pic img{width:100%;height:100%;}
+        .con ul li.detail{-webkit-box-flex:1;background:#f4f4f4;}
+        .con ul li.detail dl{padding:0.55rem;box-sizing:border-box;overflow:hidden;}
+        .con ul li.detail dl dt{width:3.6rem;text-align:right;font-size:0.8rem;font-weight:bold;font-family:Arial;float:right;}
+        .con ul li.detail dl dt a{color:#d51938;}
+        .con ul li.detail dl dt a i{color:#ccc;}
+        .con ul li.detail dl dd{font-size:0.6rem;font-family:"Microsoft Yahei";color:#999;}
+        .con ul li.detail dl dd span i{color:#d51938;}
+        .con ul li.detail dl dd del{margin-left:0.65rem;}
+        .more{margin:0 0.5rem 0.5rem;height:2rem;line-height:2rem;text-align:center;font-size:0.7rem;font-family:"Microsoft Yahei";
+            font-weight: normal;background:#f5f5f5;}
+        .more a{color:#666;}
+        .table{margin:0 0.5rem 0.5rem;height:8.825rem;display:-webkit-box;box-sizing:border-box;}
+        .table .tabPic{width:3.75rem;line-height: 7.5rem; background:#ff3900;font-size:0.7rem;color:#fff;text-align:center;padding-top:1.35rem;box-sizing:border-box;}
+        .table .cel{-webkit-box-flex:1;border:1px solid #eee;font-size:0.7rem;}
+        .table .cel a{color:#999;}
+        .table .cel span{display:block;width:33.3333%;height:2.9416rem;line-height:2.9416rem;float:left;text-align:center;border-right:1px solid #eee;
+            border-bottom:1px solid #eee;box-sizing:border-box;}
+        .phone{margin:0 0.5rem .5rem;height:4rem;display:-webkit-box;}
+        .phone li{-webkit-box-flex:1;text-align:center;line-height:5.5rem;font-size:.7rem;font-family: "Microsoft Yahei";color:#fff;}
+        .login{height:2.25rem;line-height:2.25rem;font-size:.7rem;font-family: "Microsoft Yahei";display:-webkit-box;-webkit-box-direction:reverse;background:#f8f8f8;}
+        .login dd{width:2.75rem;text-align:center;}
+        .login dt{-webkit-box-flex:1;text-align:right;}
+        .login dt::after{
+            content:"";
+            border:0.2rem dashed transparent;
+            border-bottom:0.2rem solid #999;
+        }
+        footer{
+            height:8.575rem;
+            background:#eee;
+        }
+    </style>
+    <script>
+        (function(win,doc){
+            win.onload=win.onresize=function(){
+                doc.documentElement.style.fontSize=20*doc.documentElement.clientWidth/320+'px';
+            };
+        })(window,document);
+    </script>
+</head>
+<body>
+<div class="wrap">
+    <header>
+        <a href="" class="back"><img src="img/imgRem/back.png" alt=""/></a>
+        <h1><a href=""><img src="img/imgRem/logo.png" alt=""/></a></h1>
+    </header>
+    <section class="banner">
+        <ul>
+            <li><a href=""><img src="img/imgRem/banner.jpg" alt=""/></a></li>
+        </ul>
+        <ol><li class="on"></li><li></li><li></li><li></li><li></li></ol>
+    </section>
+    <section class="list">
+        <dl>
+            <dt><a href="" style="background:#ff3900"><img src="img/imgRem/icon1.png" alt="" class="icon1"/></a></dt>
+            <dd><a href="">商品</a></dd>
+        </dl>
+        <dl>
+            <dt><a href="" style="background:#8bca11"><img src="img/imgRem/icon2.png" alt="" class="icon2"/></a></dt>
+            <dd><a href="">商品</a></dd>
+        </dl>
+        <dl>
+            <dt><a href="" style="background:#000"><img src="img/imgRem/icon3.png" alt="" class="icon3"/></a></dt>
+            <dd><a href="">商品</a></dd>
+        </dl>
+        <dl>
+            <dt><a href="" style="background:#ff529d"><img src="img/imgRem/icon4.png" alt="" class="icon4"/></a></dt>
+            <dd><a href="">商品</a></dd>
+        </dl>
+    </section>
+    <section class="list">
+        <dl>
+            <dt><a href="" style="background:#cfa871"><img src="img/imgRem/icon5.png" alt="" class="icon5"/></a></dt>
+            <dd><a href="">商品</a></dd>
+        </dl>
+        <dl>
+            <dt><a href="" style="background:#ffb021"><img src="img/imgRem/icon6.png" alt="" class="icon6"/></a></dt>
+            <dd><a href="">商品</a></dd>
+        </dl>
+        <dl>
+            <dt><a href="" style="background:#2dc814"><img src="img/imgRem/icon7.png" alt="" class="icon7"/></a></dt>
+            <dd><a href="">商品</a></dd>
+        </dl>
+        <dl>
+            <dt><a href="" style="background:#f5493c"><img src="img/imgRem/icon8.png" alt="" class="icon8"/></a></dt>
+            <dd><a href="">商品</a></dd>
+        </dl>
+    </section>
+    <div class="con">
+        <div class="title"><i></i><a href="" class="tit">聚划算热卖排行</a><a href="" class="top">TOP10</a></div>
+        <ul>
+            <li class="num" style="background:#e00202;">1</li>
+            <li class="pic"><img src="img/imgRem/pro1.jpg" alt=""/></li>
+            <li class="detail">
+                <dl>
+                    <dt><a href="">￥51 <i>&gt;</i></a></dt>
+                    <dd>已售 10000</dd>
+                    <dd><span><i>2.3</i>折</span><del>￥299</del></dd>
+                </dl>
+            </li>
+        </ul>
+        <ul>
+            <li class="num" style="background:#ff4800;">2</li>
+            <li class="pic"><img src="img/imgRem/pro1.jpg" alt=""/></li>
+            <li class="detail">
+                <dl>
+                    <dt><a href="">￥51 <i>&gt;</i></a></dt>
+                    <dd>已售 10000</dd>
+                    <dd><span><i>2.3</i>折</span><del>￥299</del></dd>
+                </dl>
+            </li>
+        </ul>
+        <ul>
+            <li class="num" style="background:#ff7300;">3</li>
+            <li class="pic"><img src="img/imgRem/pro1.jpg" alt=""/></li>
+            <li class="detail">
+                <dl>
+                    <dt><a href="">￥51 <i>&gt;</i></a></dt>
+                    <dd>已售 10000</dd>
+                    <dd><span><i>2.3</i>折</span><del>￥299</del></dd>
+                </dl>
+            </li>
+        </ul>
+        <ul>
+            <li class="num">4</li>
+            <li class="pic"><img src="img/imgRem/pro1.jpg" alt=""/></li>
+            <li class="detail">
+                <dl>
+                    <dt><a href="">￥51 <i>&gt;</i></a></dt>
+                    <dd>已售 10000</dd>
+                    <dd><span><i>2.3</i>折</span><del>￥299</del></dd>
+                </dl>
+            </li>
+        </ul>
+        <ul>
+            <li class="num">5</li>
+            <li class="pic"><img src="img/imgRem/pro1.jpg" alt=""/></li>
+            <li class="detail">
+                <dl>
+                    <dt><a href="">￥51 <i>&gt;</i></a></dt>
+                    <dd>已售 10000</dd>
+                    <dd><span><i>2.3</i>折</span><del>￥299</del></dd>
+                </dl>
+            </li>
+        </ul>
+        <ul>
+            <li class="num">6</li>
+            <li class="pic"><img src="img/imgRem/pro1.jpg" alt=""/></li>
+            <li class="detail">
+                <dl>
+                    <dt><a href="">￥51 <i>&gt;</i></a></dt>
+                    <dd>已售 10000</dd>
+                    <dd><span><i>2.3</i>折</span><del>￥299</del></dd>
+                </dl>
+            </li>
+        </ul>
+        <ul>
+            <li class="num">7</li>
+            <li class="pic"><img src="img/imgRem/pro1.jpg" alt=""/></li>
+            <li class="detail">
+                <dl>
+                    <dt><a href="">￥51 <i>&gt;</i></a></dt>
+                    <dd>已售 10000</dd>
+                    <dd><span><i>2.3</i>折</span><del>￥299</del></dd>
+                </dl>
+            </li>
+        </ul>
+        <ul>
+            <li class="num">8</li>
+            <li class="pic"><img src="img/imgRem/pro1.jpg" alt=""/></li>
+            <li class="detail">
+                <dl>
+                    <dt><a href="">￥51 <i>&gt;</i></a></dt>
+                    <dd>已售 10000</dd>
+                    <dd><span><i>2.3</i>折</span><del>￥299</del></dd>
+                </dl>
+            </li>
+        </ul>
+        <ul>
+            <li class="num">9</li>
+            <li class="pic"><img src="img/imgRem/pro1.jpg" alt=""/></li>
+            <li class="detail">
+                <dl>
+                    <dt><a href="">￥51 <i>&gt;</i></a></dt>
+                    <dd>已售 10000</dd>
+                    <dd><span><i>2.3</i>折</span><del>￥299</del></dd>
+                </dl>
+            </li>
+        </ul>
+        <ul>
+            <li class="num">10</li>
+            <li class="pic"><img src="img/imgRem/pro1.jpg" alt=""/></li>
+            <li class="detail">
+                <dl>
+                    <dt><a href="">￥51 <i>&gt;</i></a></dt>
+                    <dd>已售 10000</dd>
+                    <dd><span><i>2.3</i>折</span><del>￥299</del></dd>
+                </dl>
+            </li>
+        </ul>
+
+    </div>
+    <p class="more"><a href="">更多划算  逛起来！</a></p>
+    <div class="table">
+        <div class="tabPic">商品团</div>
+        <div class="cel">
+            <span><a href="" style="color:#d51942;">服饰</a></span>
+            <span><a href="">服饰</a></span>
+            <span><a href="">服饰</a></span>
+            <span><a href="">服饰</a></span>
+            <span><a href="" style="color:#d51942;">服饰</a></span>
+            <span><a href="">服饰</a></span>
+            <span><a href="">服饰</a></span>
+            <span><a href="" style="color:#d51942;">服饰</a></span>
+            <span><a href="">服饰</a></span>
+        </div>
+    </div>
+    <p class="more"><a href="">精彩商品  逛起来！</a></p>
+    <div class="table">
+        <div class="tabPic" style="background:#8bca11;">生活团</div>
+        <div class="cel">
+            <span><a href="" style="color:#d51942;">服饰</a></span>
+            <span><a href="">服饰</a></span>
+            <span><a href="">服饰</a></span>
+            <span><a href="">服饰</a></span>
+            <span><a href="" style="color:#d51942;">服饰</a></span>
+            <span><a href="">服饰</a></span>
+            <span><a href="">服饰</a></span>
+            <span><a href="" style="color:#d51942;">服饰</a></span>
+            <span><a href="">服饰</a></span>
+        </div>
+    </div>
+    <p class="more"><a href="">品质生活  逛起来！</a></p>
+    <div class="table">
+        <div class="tabPic" style="background:#838383;">品牌团</div>
+        <div class="cel">
+            <span><a href="" style="color:#d51942;">服饰</a></span>
+            <span><a href="">服饰</a></span>
+            <span><a href="">服饰</a></span>
+            <span><a href="">服饰</a></span>
+            <span><a href="" style="color:#d51942;">服饰</a></span>
+            <span><a href="">服饰</a></span>
+            <span><a href="">服饰</a></span>
+            <span><a href="" style="color:#d51942;">服饰</a></span>
+            <span><a href="">服饰</a></span>
+        </div>
+    </div>
+    <p class="more"><a href="">品牌折扣  逛起来！</a></p>
+    <ul class="phone">
+        <li style="background:#38a4f1">ios客户端</li>
+        <li style="background:#8bca11">安卓客户端</li>
+        <li style="background:#ff7404">意见反馈</li>
+    </ul>
+    <dl class="login">
+        <dt>TOP</dt>
+        <dd>登录</dd>
+        <dd>注册</dd>
+    </dl>
+    <footer></footer>
+</div>
+</body>
+</html>

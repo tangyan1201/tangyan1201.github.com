@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+		*{padding: 0;margin:0;}
+			/*搜索框*/
+.sousuo{
+	width: 300px;
+	height: 30px;
+	position: relative;
+	margin-top: 10px;
+	border: 1px solid #4791FF;
+	margin: 10px auto;
+}
+
+#inp{
+	width: 200px;
+	height: 100%;
+	border: none;
+	outline: none;
+	padding-left: 35px;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+/*下拉框*/
+
+.pull{
+	position: absolute;
+	width: 199px;
+	left: 35px;
+	top: 31px;
+	border: 1px solid #b9a082;
+	border-top: none;
+	background: #fff;
+}
+
+.pull li{
+	height: 25px;
+	padding-left: 5px;
+	width: 194px;
+	line-height: 25px;
+	text-align: left;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+.pull li.on{
+	background: #ccc;
+}
+
+/*搜索文字*/
+.s-txt{
+	position: absolute;
+	left: 35px;
+	top: 0;
+	width: 200px;
+	height: 100%;
+	color: #999;
+	text-align: left;
+	line-height: 30px;
+	font-size: 14px;
+	z-index: 3;
+	/*overflow: hidden;*/
+}
+
+/*.s-txt li{
+	width: 200px;
+	height: 100%;
+	
+	color: #000;
+	text-align: left;
+	line-height: 30px;
+	font-size: 14px;
+}*/
+
+/*logo*/
+.se{
+	width: 30px;
+	height: 25px;
+	position:absolute;
+	left: 0px;
+	top: 0px;
+	z-index: 4;
+	background: #fff;
+}
+
+.se li{
+	width: 30px;
+	height: 25px;
+	padding-bottom: 5px;
+	display: none;
+}
+
+
+.du-logo{
+	background:#fff url(../img/du-logo.png) no-repeat 3px 3px;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+.logo-360{
+	background:#fff url(../img/360-logo.png) no-repeat 3px 3px;
+	position: absolute;
+	left: 0;
+	top: 28px;
+}
+
+.zhongsou{
+	background:#fff url(../img/zhong-logo.png) no-repeat 3px 3px;
+	position: absolute;
+	left: 0;
+	top: 56px;
+}
+
+.taobao{
+	background:#fff url(../img/tao-logo.png) no-repeat 3px 3px;
+	position: absolute;
+	left: 0;
+	top: 84px;
+}
+
+.suo{
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 65px;
+	height: 100%;
+	line-height: 30px;
+	color: #fff;
+	font-size: 14px;
+	text-align: center;
+	background: #317EF3;
+	cursor: pointer;
+}
+
+		</style>
+		<script src="js/jsonp.js"></script>
+		<script>
+			window.onload=function(){
+				/*
+	 *搜索框
+	 * */
+	;(function(){
+		var suosuo=document.getElementById('sousuo');
+		var oInp=document.getElementById('inp');
+		var oSpan=document.getElementById('span1');
+		var suo=document.getElementById('suo');
+		
+//		控制搜索框文字焦点
+		 oSpan.onclick=function(){
+		 	this.style.display='none';
+		 	oInp.focus();
+		 };
+		 
+		 oInp.onfocus=function(){
+		 	oSpan.style.display='none';
+		 }
+		 
+		 oInp.onblur=function(){
+		 	if(oInp.value.length==0)
+		 	{
+		 		oSpan.style.display='block'
+		 	}
+		 	
+		 };
+		 
+//		 控制logo的显示与隐藏，切换
+		 var oSe=document.getElementById('se');
+		 
+		 var oSH=oSe.children[0].offsetHeight;
+		 var oNum=oSe.children.length;
+		 var aLi=oSe.children;
+		 var bFlag=true;
+		 var aSC=oSpan.children;
+		 var arr=['百度搜索','360搜索','中搜搜索'];
+		 
+		 
+		 
+		 for(var i=0;i<aLi.length;i++)
+		 {
+		 		aLi[i].index=i;
+			 	aLi[i].onclick=function(ev){
+			 		var  _this=this
+			 		var oEvent=ev || event;
+			 		if(bFlag){
+			 			for(var i=0;i<aLi.length;i++){
+			 				
+			 				aLi[i].style.display='block';
+			 			};
+			 			bFlag=false
+			 		}
+			 		else{
+//			 			var oldI=index;
+			 			oSe.removeChild(this);
+			 			oSe.insertBefore(this,oSe.children[0]);
+			 			for(var i=0;i<aLi.length;i++){
+			 				aLi[i].style.top=i*oSH+'px';
+			 				aLi[i].style.display='none'
+			 			}
+						oSpan.innerHTML='';
+//						控制文字的切换
+			 			oSpan.innerHTML=arr[this.index];
+			 			this.style.display='block';
+			 			bFlag=true;
+			 		}
+			 		
+			 		oEvent.cancelBubble=true;
+			 	};
+			 	
+//			 	logo的颜色改变
+			 	aLi[i].onmouseover=function(){
+			 		for(var i=0;i<aLi.length;i++){
+			 			aLi[i].style.backgroundColor='#fff';
+			 		}
+			 		this.style.backgroundColor='#ccc';
+			 	};
+			 	
+			 	aLi[i].onmouseout=function(){
+			 		this.style.backgroundColor='#fff';
+			 	};
+			 	
+		 }
+		 
+//		 	点击空白处logo隐藏
+		 	document.onclick=function(){
+				for(var i=0;i<aLi.length;i++)
+				{
+					aLi[i].style.display='none';
+				}
+				aLi[0].style.display='block';
+				bFlag=true;
+		 	};
+
+
+			//jsonp
+			 var Ul=document.getElementById('pull');
+			var iNow=-1;
+			
+			var oldvalue='';
+			
+			
+			//输入文字的操作
+			oInp.onkeyup=function(ev){
+				var name=oSe.children[0].getAttribute('data-name');
+				var oEvent=ev || event;
+				if(oEvent.keyCode==40 || oEvent.keyCode==38){
+					return;	
+				}
+				
+				if(oEvent.keyCode==13){
+					caseName(name);
+				}
+				
+				switch(name)
+				{
+					case 'baidu':
+						jsonpDao({
+						url:'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',
+						scuLi:'https://www.baidu.com/s?wd='
+						})
+					break;
+						
+					case 'logo-360':
+					jsonpDao({
+					url:'https://sug.so.360.cn/suggest?callback=suggest_so&encodein=utf-8&encodeout=utf-8&word=',
+					cbName:'callback',
+					scuLi:'https://www.so.com/s?ie=utf-8&q='
+					})
+					break;
+					
+					case 'zhongsou':
+					jsonpDao({
+					url:'http://tip.zhongsou.com/ctip?&w=',
+					cbName:'callback',
+					scuLi:'http://www.zhongsou.com/third.cgi?w='
+					})	
+					break;
+					
+					default:
+					jsonpDao({
+						url:'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',
+						scuLi:'https://www.baidu.com/s?wd='
+					});
+				}
+				oldValue=oInp.value;	
+			};
+			
+			//点击搜索的时候
+			suo.onclick=function(){
+				var name=oSe.children[0].getAttribute('data-name');
+				caseName(name);
+			}
+			
+			
+			//输入完成对创建的li做操作
+			
+			oInp.onkeydown=function(ev){
+				var aLi=Ul.children;
+				
+				var oEvent=ev || event;
+				if(oEvent.keyCode==40)
+				{
+					iNow++;
+					if(iNow==aLi.length)
+					{
+						iNow=-1;
+					}
+					for(var i=0; i<aLi.length; i++){
+						aLi[i].className='';
+					}
+					
+					if(iNow==-1)
+					{
+						oInp.value=oldValue;
+					}
+					else
+					{
+						oInp.value=aLi[iNow].innerHTML;
+						aLi[iNow].className='on'
+					}
+				}
+				
+				if(oEvent.keyCode==38)
+				{
+					iNow--;
+					if(iNow==-2)
+					{
+						iNow=aLi.length-1;
+					}
+					for(var i=0; i<aLi.length; i++){
+						aLi[i].className='';
+					}
+					
+					if(iNow==-1)
+					{
+						oInp.value=oldValue;
+					}
+					else
+					{
+						oInp.value=aLi[iNow].innerHTML;
+						aLi[iNow].className='on'
+					}
+				}
+				
+			};
+			
+			//jsonp封装调用
+			
+			function jsonpDao(jsonpc)
+			{
+				var name=oSe.children[0].getAttribute('data-name');
+				jsonpc=jsonpc || {};
+				if(!jsonpc.url)return;
+				jsonp({
+						url:jsonpc.url,
+						data:{
+							w:oInp.value,
+							wd:oInp.value,
+							encodein:'utf-8',
+							encodeout:'utf-8'
+						},
+						cbName:jsonpc.cbName || 'cb',
+						success:function(json){
+							Ul.innerHTML='';
+							
+							var pArr=json.s;
+							
+							Li(pArr,jsonpc.scuLi);
+//							
+						}
+					});
+			}
+			
+			
+			//case的封装
+			function caseName(name)
+			{
+				switch(name)
+				{
+					case 'baidu':
+					window.open('https://www.baidu.com/s?wd='+oInp.value,'_self');
+					oInp.value='';
+					Ul.style.display='none';
+					break;
+					
+					case 'logo-360':
+					window.open('https://www.so.com/s?ie=utf-8&q='+oInp.value);
+					oInp.value='';
+					Ul.style.display='none';
+					break;
+					
+					case 'zhongsou':
+					window.open('http://www.zhongsou.com/third.cgi?w='+oInp.value);
+					oInp.value='';
+					Ul.style.display='none';
+					break;
+					
+					default:
+					window.open('https://www.baidu.com/s?wd='+oInp.value,'_self');
+					oInp.value='';
+					Ul.style.display='none';
+				}
+			}
+			
+			//创建li
+			function Li(Arr,Url)
+			{
+				
+				if(Arr.length)
+				{
+					Ul.style.display='block';
+				}
+				else
+				{
+					Ul.style.display='none';
+				}
+				
+				//创建li
+				for(var j=0;j<Arr.length;j++)
+				{
+					var oLi=document.createElement('li');
+					oLi.innerHTML=Arr[j];
+					Ul.appendChild(oLi);
+					
+					(function(index){
+						oLi.onmouseover=function(){
+							
+							for(var i=0;i<Ul.children.length;i++)
+							{
+								Ul.children[i].className='';
+							}
+							this.className='on';
+							iNow=index;
+						};
+						
+						oLi.onmouseout=function(){
+							for(var i=0;i<Ul.children.length;i++)
+							{
+								Ul.children[i].className='';
+							}
+						};
+						
+						oLi.onclick=function(){
+							var name=oSe.children[0].getAttribute('data-name');
+							switch(name)
+							{
+								case 'baidu':
+								window.open(Url+this.innerHTML,'_self');
+								oInp.value='';
+								Ul.style.display='none';
+								break;
+								
+								case 'logo-360':
+								window.open(Url+oInp.value);
+								oInp.value='';
+								Ul.style.display='none';
+								break;
+								
+								case 'zhongsou':
+								window.open(Url+oInp.value);
+								oInp.value='';
+								Ul.style.display='none';
+								break;
+								
+								default:
+								window.open(Url+this.innerHTML,'_self');
+								oInp.value='';
+								Ul.style.display='none';
+							}
+											
+						};
+						
+					})(i)
+				}
+			}
+
+	})();
+
+			};
+		</script>
+	</head>
+	<body>
+		<div class="sousuo fr" id="sousuo">
+						<ul class="se" id="se">
+							<li class="du-logo" style="display: block;" data-name ="baidu"></li>
+							<li class="logo-360" data-name ="logo-360"></li>
+							<li class="zhongsou" data-name ="zhongsou"></li>
+							<!--<li class="taobao" data-name ="taobao"></li>-->
+						</ul>
+						<!--搜索框-->
+						<input type="text" id="inp" />
+						<!--下拉框-->
+						<ul id="pull" class="pull">
+							<!--<li>askdlds</li>
+							<li class="on">aaassdsd</li>-->
+						</ul>
+						<!--搜索框文字-->
+						<span class="s-txt" id="span1">
+							百度搜索
+						</span>
+						<span class="suo" id="suo">搜 索</span>
+					</div>
+	</body>
+</html>

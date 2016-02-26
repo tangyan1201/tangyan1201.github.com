@@ -34,5 +34,25 @@ function jsonp(json){
 	
 };
 
+//中搜的jsonp
+function zhongsou(json)
+{
+	json=json || {};
+	if(!json.url)return;
+	json.data=json.data || [];
+	
+	window[fnName]=function(arr){
+		
+		json.success && json.success(arr);
+		
+		//删除
+		oHead.removeChild(oS);
+	};
+	
+	var oS=document.createElement('script');
+	oS.src=json.url+'?'+json2url(json.data);
+	var oHead=document.getElementsByTagName('head')[0];
+	oHead.appendChild(oS);
+}
 
 

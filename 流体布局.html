@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <title>流体式布局</title>
+    <style>
+        *{margin:0;padding:0;}
+        html,body{height:100%;}
+        .wrap{width:100%;}
+        .wrap header{width:100%;height:3.21em;padding:7px 3.57em 7px 8px;position:fixed;left:0;top:0;box-sizing:border-box;background:#F6F6F6;}
+        header .search{height:2em;line-height:2em;position:relative;border-radius:5px;background:#fff;border:1px solid #999;box-shadow:0 2px 4px rgba(0,0,0,.2);}
+        header .search span{font-size:0.86em;color:#666;position:absolute;left:0;top:0;padding:0 5px;}
+        header .photo{width:44px;position:absolute;right:4px;top:0;background:#C6E746;}
+        header .photo::before{
+            content:"photo";
+            height:22px;
+            line-height:22px;
+        }
+        .photo label{display: block;height:20px;line-height:20px;}
+        .banner{width:100%;height:269px;margin:48px auto 0;}
+        .banner img{width:100%;height:100%;}
+        nav{padding:5px;font-size:15px;}
+        nav .row{width:100%;margin-bottom:5px;height:6em;border-radius:5px;box-sizing:border-box;background:#ff697a;}
+        nav .row .col{width:33.3333%;height:100%;border-right:1px solid #fff;box-sizing:border-box;float:left;}
+        nav .row .col a{display:block;height:100%;font-size:1em;color:#fff;text-decoration:none;text-align:center;}
+        nav .row .col a.hotel{padding-top:15px;box-sizing:border-box;}
+        nav .row .col a.hotel-sale{height:50%;line-height:3em;}
+        nav .row .col a.hotel-sale.bt{border-bottom:1px solid #fff;}
+        nav .row.blue{background:#3d98ff;}
+        nav .row.green{background:#44c522;}
+        nav .row.orange{background:#fc9720;}
+        dl{margin:0 5px 5px;overflow:hidden;border:1px solid #d8d8d8;border-radius:5px;}
+        dl dd{width:50%;float:left;box-sizing:border-box;}
+        dl dd img{width:100%;height:100%;}
+        footer{border-top:1px solid #ccc;padding-bottom:5px;text-align:center;}
+        footer div{height:3.57em;line-height:3.57em;margin-bottom:5px;border-bottom:1px solid #c2c2c2;overflow: hidden;}
+        footer div a{display:block;width:33.3333%;text-align:center;float:left;font-size:14px;text-decoration:none;}
+        footer p{text-align:center;font-size:13px;}
+        footer p a{text-decoration:none;}
+        footer span{display:block;font-size:12px;text-align:center;color:#999;padding:5px 0;}
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <header>
+        <div class="search">
+            <span>搜索:目的地/酒店/景点/航班号</span>
+        </div>
+        <div class="photo">
+            <label>我的</label>
+        </div>
+    </header>
+    <section class="banner">
+        <img src="img/images/xcbanner.jpg" alt=""/>
+    </section>
+    <nav>
+        <div class="row">
+            <div class="col"><a href="javascript:;" class="hotel">酒店</a></div>
+            <div class="col">
+                <a href="javascript:;" class="hotel-sale bt">海外酒店</a>
+                <a href="javascript:;" class="hotel-sale">海外酒店</a>
+            </div>
+            <div class="col">
+                <a href="javascript:;" class="hotel-sale bt">海外酒店</a>
+                <a href="javascript:;" class="hotel-sale">海外酒店</a>
+            </div>
+        </div>
+        <div class="row blue">
+            <div class="col"><a href="javascript:;" class="hotel">机票</a></div>
+            <div class="col">
+                <a href="javascript:;" class="hotel-sale bt">海外酒店</a>
+                <a href="javascript:;" class="hotel-sale">海外酒店</a>
+            </div>
+            <div class="col">
+                <a href="javascript:;" class="hotel-sale bt">海外酒店</a>
+                <a href="javascript:;" class="hotel-sale">海外酒店</a>
+            </div>
+        </div>
+        <div class="row green">
+            <div class="col"><a href="javascript:;" class="hotel">旅游</a></div>
+            <div class="col">
+                <a href="javascript:;" class="hotel-sale bt">海外酒店</a>
+                <a href="javascript:;" class="hotel-sale">海外酒店</a>
+            </div>
+            <div class="col">
+                <a href="javascript:;" class="hotel-sale bt">海外酒店</a>
+                <a href="javascript:;" class="hotel-sale">海外酒店</a>
+            </div>
+        </div>
+        <div class="row orange">
+            <div class="col"><a href="javascript:;" class="hotel-sale bt">门票·玩乐</a><a href="javascript:;" class="hotel-sale">礼品卡</a></div>
+            <div class="col">
+                <a href="javascript:;" class="hotel-sale bt">海外酒店</a>
+                <a href="javascript:;" class="hotel-sale">海外酒店</a>
+            </div>
+            <div class="col">
+                <a href="javascript:;" class="hotel-sale bt">海外酒店</a>
+                <a href="javascript:;" class="hotel-sale">海外酒店</a>
+            </div>
+        </div>
+    </nav>
+    <dl>
+        <dd style="border-right:1px solid #d8d8d8;"><a href="javascript:;"><img src="img/images/icon.png" alt=""/></a></dd>
+        <dd><a href="javascript:;"><img src="img/images/icon.png" alt=""/></a></dd>
+    </dl>
+    <footer>
+        <div>
+            <a href="javascript:;">电话预定</a><a href="javascript:;">下载客户端</a><a href="javascript:;">我的</a>
+        </div>
+        <p><a href="javascript:;">网站地图</a>|<a href="javascript:;">ENGLISH</a>|<a href="javascript:;">电脑版</a></p>
+        <span>©2016 携程旅行</span>
+    </footer>
+</div>
+</body>
+</html>
